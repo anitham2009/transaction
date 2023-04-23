@@ -1,0 +1,9 @@
+{
+      "accountId": 3,
+      "balance": 10,
+      "description": "string",
+      "transactionId": 1,
+      "transactionNumber": "TXNABCA1682248454850582132681",
+      "transferredAmount": 10,
+      "transferredDate": "2023-04-23T15:54:36.988Z"
+    }
