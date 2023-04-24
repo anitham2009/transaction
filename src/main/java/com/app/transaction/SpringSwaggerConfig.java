@@ -31,7 +31,7 @@ public class SpringSwaggerConfig {
     }
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("Transaction Service API").version("1.0")
-                .description("Record Transaction")
+                .description("Transaction")
                 .build();
     }
 }
