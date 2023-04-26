@@ -28,6 +28,11 @@ import com.app.transaction.service.intf.ISearchTransactionService;
 import com.app.transaction.util.TransactionConstants;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 /**
  * This class is used to invokes method to create Transaction and get
@@ -53,6 +58,13 @@ public class TransactionController {
 	 * @param accountId account Id
 	 * @return TransactionResponse
 	 */
+	@ApiOperation(value = "Save Transaction details of Account")
+	@ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = TransactionResponse.class))}),
+            @ApiResponse(responseCode = "422", description = "Error Response",
+            content = @Content)})
 	@GetMapping(value = "/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public TransactionResponse retrieveTransactionDtl(@PathVariable("accountId") Long accountId) {
 		LOGGER.debug("Inside  retrieveTransactionDtl method {}", this.getClass());
@@ -65,17 +77,24 @@ public class TransactionController {
 	 * @param transactionRequest transaction request
 	 * @return TransctionResponse
 	 */
+	@ApiOperation(value = "Get Transaction details of Account")
+	@ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = TransactionResponse.class))}),
+            @ApiResponse(responseCode = "422", description = "Error Response",
+            content = @Content)})
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	public TransactionResponse saveTransaction(@Valid @RequestBody TransactionRequest transactionRequest) {
 		LOGGER.debug("Inside creditPayment method {}", this.getClass());
 		TransactionResponse response = createTransactionService.createTransaction(transactionRequest);
 		return response;
 	}
-	
+
 	/**
-	 * 
-	 * @param ex
-	 * @return
+	 * Handles Invalid request input.
+	 * @param exception MethodArgumentNotValidException
+	 * @return TransactionResponse
 	 */
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -85,9 +104,12 @@ public class TransactionController {
 			String fieldName = ((FieldError) error).getField();
 			builder.append(fieldName).append(TransactionConstants.BLANK_SPACE);
 		});
-		ErrorMessage errorMessage = ErrorMessage.builder().message(TransactionConstants.INVALID_INPUT+ builder.toString())
-				.statusCode(TransactionConstants.STATUS_CODE_400).source(TransactionConstants.TRANSACTION_SERVICE).build();
-		TransactionResponse errorResponse =  TransactionResponse.builder().message(TransactionConstants.FAILURE).errorMessage(errorMessage).transaction(new ArrayList<>()).build();
+		ErrorMessage errorMessage = ErrorMessage.builder()
+				.message(TransactionConstants.INVALID_INPUT + builder.toString())
+				.statusCode(TransactionConstants.STATUS_CODE_400).source(TransactionConstants.TRANSACTION_SERVICE)
+				.build();
+		TransactionResponse errorResponse = TransactionResponse.builder().message(TransactionConstants.FAILURE)
+				.errorMessage(errorMessage).transaction(new ArrayList<>()).build();
 		return errorResponse;
 	}
 

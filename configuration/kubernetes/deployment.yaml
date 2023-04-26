@@ -46,7 +46,7 @@ metadata:
   namespace: default
 spec:
   ports:
-  - #nodePort: 31127
+  - 
     port: 8004
     protocol: TCP
     targetPort: 8004

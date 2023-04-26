@@ -10,22 +10,25 @@ import com.app.transaction.util.TransactionConstants;
 
 /**
  * This class is used to Create Transction Number
+ * 
  * @author Anitha Manoharan
  *
  */
 @Component
 public class CreateTransactionNumber {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CreateTransactionNumber.class);
+
 	/**
-	 * Create transaction number to use while saving transaction.
-	 * Use Random class to generate random numbers.
+	 * Create transaction number to use while saving transaction. Use Random class
+	 * to generate random numbers.
+	 * 
 	 * @return String
 	 */
 	public static String createTransactionNumber() {
 		LOGGER.debug("Inside createTransactionNumber method {}", CreateTransactionNumber.class);
 		Random random = new Random();
 		int randomNumber = Math.abs(random.nextInt());
-		String transactionNumber =  TransactionConstants.TRANSACTION_PREFIX + System.currentTimeMillis()+randomNumber;
+		String transactionNumber = TransactionConstants.TRANSACTION_PREFIX + System.currentTimeMillis() + randomNumber;
 		return transactionNumber;
 	}
 
