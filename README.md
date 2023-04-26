@@ -73,11 +73,11 @@
 	- http://20.84.12.77:8003/actuator/health
 		  			 		      	
 ## Swagger Documentation
- - [Application URL](http://<hostname>:8003/swagger-ui/) (Prerequisite: The application should be running on port number : 8003)
+ - [Application URL](http://<hostname>:8003/swagger-ui/) (Prerequisite: The application should be running on port number : 8003, hostname should be EXTERNAL-IP/localhost)
 ![Resource](images/transactionresource.png)
 
 ## Accessing H2 Database
- - [Database URL](http://localhost:8003/h2)  (Prerequisite: The application should be running on port number : 8003 and localhost)
+ - [Database URL](http://localhost:8003/h2)  (Prerequisite: The application should be running on port number : 8003 and can only be accessed in localhost)
 
 ## Initial Data
  - transaction_detail table will be created
