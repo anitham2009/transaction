@@ -55,7 +55,7 @@ public class TransactionControllerIntegrationTest {
 	@Test
 	@Order(2)
 	public void testRetrieveTransaction() throws Exception {
-		String url = getRootURL() + CommonConstants.BACK_SLASH + 3L;
+		String url = getRootURL() + CommonConstants.BACK_SLASH + 1L;
 		TransactionResponse postResponse = restTemplate.getForObject(url, TransactionResponse.class);
 		assertNotNull(postResponse);
 		assertEquals(CommonConstants.SUCCESS, postResponse.getMessage());
@@ -77,7 +77,7 @@ public class TransactionControllerIntegrationTest {
 	@Test
 	@Order(4)
 	public void testRetrieveTransactionFailure() throws Exception {
-		String url = getRootURL() + CommonConstants.BACK_SLASH + 5L;
+		String url = getRootURL() + CommonConstants.BACK_SLASH + 3L;
 		TransactionResponse postResponse = restTemplate.getForObject(url, TransactionResponse.class);
 		assertNotNull(postResponse);
 		assertEquals(CommonConstants.FAILURE, postResponse.getMessage());

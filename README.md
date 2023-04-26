@@ -1,6 +1,6 @@
 # Transaction Service API overview
-- Transaction service application is to store the account details, view the stored data.
-- Handled operations : create,get transaction details of the account.
+- Transaction service application is to store the transaction details and also to view the stored data.
+- Handled operations : create transaction details and view transaction details.
 - Build and deploy application using Azure CI/CD pipeline in Azure Kubernetes Cluster
 
 ## Technology Stack
@@ -68,24 +68,20 @@
 	- http://20.84.12.77:8003/actuator/health
 		  			 		      	
 ## Swagger Documentation
- - [Application URL](http://<hostname>:8003/recipeservice/swagger-ui/) (Prerequisite: The application should be running on port number : 8003)
-![Resource](images/accountresource.png)
+ - [Application URL](http://<hostname>:8003/swagger-ui/) (Prerequisite: The application should be running on port number : 8003)
+![Resource](images/transactionresource.png)
 
 ## Accessing H2 Database
  - [Database URL](http://localhost:8003/h2)  (Prerequisite: The application should be running on port number : 8003 and localhost)
 
 ## Initial Data
- - On startup application will load initial data. You can Add/Modify existing data in src/main/resources/data.sql
- - To create current account branch,account type of type current account, customer mapped with branch is mandatory. Initial data has 2 customers with id 1, 2
+ - transaction_detail table will be created
  
 ## Achieved Functionalities
-   - Create New Account and its transaction
-   - Get saved Current account by customer id.
-   - While creating new current account it will invoke transaction service to store transaction of that account.
-   	 If transaction fails/unable to connect transaction service then created account will be deleted.
-   - Circuit breaker pattern is applied to the resource in account service -Minimum number of call is set to 5
-   - Integration Test using Wiremock (AccountControllerIntegrationTest.java)
-   - Unit test 
+   - Persist transaction details, if it notify the caller.
+   - Get saved transaction details.
+   - Unit test
+   - Integration Test(TransactionControllerIntegrationTest.java)
    - Created CI/CD pipeline to deploy application in Azure Kubernetes service
    - Added actuator to monitor application
    - Swagger Documentation
