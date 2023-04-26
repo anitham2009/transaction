@@ -58,7 +58,7 @@ public class TransactionController {
 	 * @param accountId account Id
 	 * @return TransactionResponse
 	 */
-	@ApiOperation(value = "Save Transaction details of Account")
+	@ApiOperation(value = "Get Transaction details of Account")
 	@ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = {@Content(mediaType = "application/json",
@@ -77,7 +77,7 @@ public class TransactionController {
 	 * @param transactionRequest transaction request
 	 * @return TransctionResponse
 	 */
-	@ApiOperation(value = "Get Transaction details of Account")
+	@ApiOperation(value = "Save Transaction details of Account")
 	@ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = {@Content(mediaType = "application/json",
